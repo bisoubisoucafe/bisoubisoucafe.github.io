@@ -1,0 +1,639 @@
+:root{
+  --outer-bg: #F2E9D8;
+  --cream:#FBF6EA;
+  --cream2:#F3E9D4;
+  --navy:#2C3A56;
+  --navy-deep:#212C42;
+  --terracotta: #2B3D55;
+  --terracotta-deep:#A8501F;
+  --ink:#2C2318;
+  --ink-soft:#5C5140;
+  --cream-text:#F7EFDE;
+  --radius:10px;
+  --board-radius:36px;
+  --pad:clamp(20px, 6%, 56px);
+  --max:1000px;
+
+  /* ---- ここを変更するだけで各boardの色を変更できます ---- */
+  --board-hero-bg: var(--terracotta);
+  --board-mainfood-bg: #A7392E;
+  --board-drink-bg:  #B9C7E0;
+  --board-sweets-bg: #767572;
+  --board-menu-bg: var(--terracotta);
+  --board-winenight-bg: #5B1A28;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--outer-bg);
+  color:var(--ink);
+  font-family:"Zen Kaku Gothic New","Hiragino Sans",sans-serif;
+  font-weight:400;
+  line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+
+.jp-bold{font-family:"M PLUS Rounded 1c", sans-serif; font-weight:800;}
+.en-bold{font-family:"Fredoka", sans-serif; font-weight:600;}
+
+/* ---------- Page board (booklet container) ---------- */
+.board{
+  position:relative;
+  width:min(94vw, 1040px);
+  margin:clamp(20px,4vh,48px) auto clamp(32px,7vh,72px);
+  background:var(--cream);
+  border-radius:var(--board-radius);
+  box-shadow:0 50px 100px -45px rgba(44,35,24,.4), 0 10px 30px -15px rgba(44,35,24,.15);
+  overflow:hidden;
+}
+/* 一番上のboard：上の余白幅を左右の余白幅と揃える */
+.board.board-hero{
+  margin-top: calc((100vw - min(94vw, 1040px)) / 2);
+}
+
+
+#page{opacity:0; transition:opacity 1.2s ease;}
+#page.visible{opacity:1;}
+
+/* ---------- Loading screen ---------- */
+.loader{
+  position:fixed; inset:0; z-index:999;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--outer-bg);
+  transition:opacity .6s ease, visibility .6s ease;
+}
+.loader-logo{
+  width:42%;
+  max-width:220px;
+  animation:loaderPulse 1.6s ease-in-out infinite;
+}
+.loader.hide{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+@keyframes loaderPulse{
+  0%,100%{ transform:scale(1); opacity:1; }
+  50%{ transform:scale(1.08); opacity:.85; }
+}
+@media (prefers-reduced-motion:reduce){
+  .loader-logo{animation:none;}
+  .loader{transition:none;}
+}
+
+.reveal{opacity:0; transform:translateY(18px); transition:opacity .9s ease, transform .9s ease;}
+.reveal.in{opacity:1; transform:translateY(0);}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  .reveal{opacity:1;transform:none;transition:none;}
+  #page{opacity:1;}
+}
+
+/* ---------- Sticky top bar (floats over the board) ---------- */
+.topbar{
+  position:fixed; top:0; left:50%;
+  transform:translateX(-50%);
+  width:min(94vw, 1040px);
+  z-index:150;
+  display:flex; justify-content:flex-end;
+  padding:18px var(--pad) 0;
+  pointer-events:none;
+}
+.menu-btn{
+  pointer-events:auto;
+  background:var(--terracotta);
+  color:var(--cream-text);
+  font-family: "allotrope-heavy", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+  font-size:.85rem;
+  letter-spacing:.08em;
+  border:none;
+  border-radius:999px;
+  padding:.65em 1.4em;
+  cursor:pointer;
+  box-shadow:0 8px 18px -8px rgba(44,35,24,.35);
+  opacity:1;
+  transition:opacity .25s ease;
+  margin-top: 12%;
+}
+.menu-btn.is-hidden{
+  opacity:0;
+  pointer-events:none;
+}
+
+.nav-overlay{
+  position:fixed; inset:0; z-index:80;
+  background:var(--navy-deep);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:1.6rem;
+  transform:translateY(-100%);
+  transition:transform .5s ease;
+}
+.nav-overlay.open{transform:translateY(0);}
+.nav-overlay a{
+  font-family: "allotrope-heavy", sans-serif;
+  font-weight:500;
+  font-size:1.8rem;
+  color:var(--cream-text);
+}
+.nav-close{
+  position:absolute; top:10%; right:6vw;
+  background:none; border:none;
+  font-family: "allotrope-heavy", sans-serif;
+  color:var(--cream-text);
+  font-size:1.6rem;
+  cursor:pointer;
+}
+
+
+/* ---------- Showcase slider (now the opening section) ---------- */
+.showcase{
+  position:relative;
+  margin-top:-56px; /* pulls up under the sticky topbar so the color block starts at the very top of the board */
+}
+.slides{
+  display:block;
+}
+.slides::-webkit-scrollbar{display:none;}
+.slide{
+  flex:0 0 100%;
+  scroll-snap-align:start;
+  min-height:82vh;
+  display:flex;
+  flex-direction:column;
+  padding:64px var(--pad) 48px;
+  color:var(--cream-text);
+}
+.slide{background:var(--terracotta);}
+.board-hero .slide{background:var(--board-hero-bg);}
+.board-mainfood .slide{background:var(--board-mainfood-bg);}
+.board-drink .slide{background:var(--board-drink-bg);}
+.board-sweets .slide{background:var(--board-sweets-bg);}
+.board-menu .slide{background:var(--board-menu-bg);}
+.board-winenight .slide{background:var(--board-winenight-bg);}
+.slide:first-child{border-top-left-radius:var(--board-radius); border-top-right-radius:var(--board-radius);}
+
+.photo-slider{
+  margin-top:auto;
+  width:calc(100% + (var(--pad) * 2) + 2px);
+  margin-left:calc((var(--pad) * -1) - 1px);
+  overflow:hidden;
+
+
+  display:flex;
+  overflow-x:auto;
+
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  box-shadow:0 30px 60px -25px rgba(0,0,0,.4);
+  position:relative;
+}
+
+.photo-slider::-webkit-scrollbar{
+  display:none;
+}
+
+.photo-slider img{
+  flex:0 0 100%;
+  width:100%;
+  height:44vh;
+
+  object-fit:cover;
+  scroll-snap-align:start;
+}
+
+/* Menuのスライダー：画像を切り抜かず、そのままの縦横比で表示 */
+.photo-slider-natural{
+  align-items:center;
+  background:rgba(0,0,0,.12);
+}
+.photo-slider-natural img{
+  height:auto;
+  object-fit:contain;
+}
+
+/* ---------- Lightbox (enlarged menu images) ---------- */
+.board-menu .photo-slider img{
+  cursor:zoom-in;
+}
+.lightbox{
+  position:fixed; inset:0; z-index:300;
+  display:flex; align-items:center; justify-content:center;
+  padding:6vw;
+  background:rgba(33,24,16,.88);
+  opacity:0; visibility:hidden;
+  transition:opacity .3s ease, visibility .3s ease;
+}
+.lightbox.open{
+  opacity:1; visibility:visible;
+}
+.lightbox img{
+  max-width:100%;
+  max-height:100%;
+  border-radius:12px;
+  box-shadow:0 30px 70px -20px rgba(0,0,0,.6);
+  cursor:zoom-out;
+}
+
+.slide-logo{
+    margin-left: -0.5rem;
+    margin-top: 1rem;
+    width: 25%;
+}
+
+.slide-headline{
+  margin-top:-3vh;
+  position:relative;
+  z-index:2;
+  font-family:"Fredoka", sans-serif;
+  font-weight:600;
+  line-height:1;
+  text-align: center;
+  
+}
+
+
+.slide-headline + .photo-slider{
+  margin-top:-170px;
+  position:relative;
+  z-index:1;
+}
+.slide-caption{
+  margin-top:2rem;
+  text-align:center;
+  font-family: "hiragino-kaku-gothic-pron", sans-serif;
+  font-weight:800;
+  font-size:1rem;
+}
+.dots{
+  display:flex; justify-content:center; gap:.5rem;
+  padding:1.4rem 0 2rem;
+}
+.dots span{
+  width:8px;height:8px;border-radius:50%;
+  background:rgb(246, 245, 244 ,0.3);
+  transition:background .3s ease;
+}
+.dots span.active{background:rgba(246, 245, 244);}
+
+.section-title {
+  font-family: "allotrope-heavy", sans-serif;
+  text-align: center;
+  font-size: 30px;
+}
+
+/* Main Foodまでスクロールすると右端から顔を出すわんちゃん */
+.dog-peek{
+  position:fixed;
+  top:70%;
+  right:-90px;
+  width:130px;
+  transform: scale(-1, 1);
+  z-index:60;
+  pointer-events:none;
+  transition:right .7s cubic-bezier(.34,1.56,.64,1);
+}
+.dog-peek.in{
+  right:-30px;
+}
+@media (prefers-reduced-motion:reduce){
+  .dog-peek{transition:none;}
+}
+
+
+.section-marquee {
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-top: -2rem;
+  margin-bottom: -2rem;
+}
+
+.marquee-text {
+  display: inline-block;
+  padding-right: .8em;
+  font-size: 50px;
+  font-family: "allotrope-heavy", sans-serif;
+  color: #672518;
+  animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* ---------- Located strip ---------- */
+.located{
+  padding:6vh 0 8vh;
+  background:var(--cream2);
+}
+.located-heading{
+  padding:0 var(--pad);
+  font-family:"Fredoka", sans-serif;
+  font-weight:600;
+  font-size:clamp(1.5rem,5.5vw,2.3rem);
+  color:var(--navy);
+  margin-bottom:4vh;
+}
+.strip{
+  display:flex;
+  gap:1rem;
+  overflow-x:auto;
+  padding:0 var(--pad);
+  scroll-snap-type:x proximity;
+  -webkit-overflow-scrolling:touch;
+}
+.strip::-webkit-scrollbar{display:none;}
+.strip img{
+  scroll-snap-align:center;
+  flex:0 0 auto;
+  width:60vw;
+  max-width:300px;
+  height:70vw;
+  max-height:360px;
+  object-fit:cover;
+  border-radius:14px;
+}
+.strip img.tall{height:80vw; max-height:400px;}
+
+/* ---------- Landing (moved below Located: wordmark + instagram + cards) ---------- */
+.landing{
+  padding:8vh var(--pad) 6vh;
+  text-align:center;
+  background-color: #B8C7E0;
+}
+.landing-sub{
+  margin-top:0rem;
+  font-family: "hiragino-kaku-gothic-pron", sans-serif;
+  font-weight: 900;
+  line-height: 1.8;
+  font-style: normal;
+  font-size:1.02rem;
+  color:var(--ink);
+}
+.insta-btn{
+  margin:.8rem auto 0;
+  display:inline-flex; align-items:center; gap:.6em;
+  border:2px solid var(--navy);
+  padding:.7em 1.7em;
+  font-family: "allotrope-heavy", sans-serif;
+  font-weight:800;
+  color:var(--navy);
+  font-size:.98rem;
+}
+.insta-btn svg{width:20px;height:20px;}
+
+.logo-top{
+  animation: rubberBand 1s ease 1 both ;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 55%;
+    
+}
+
+@keyframes rubberBand {
+  0% { transform: scale3d(1, 1, 1); }
+  30% { transform: scale3d(1.25, 0.75, 1); }
+  40% { transform: scale3d(0.75, 1.25, 1); }
+  50% { transform: scale3d(1.15, 0.85, 1); }
+  65% { transform: scale3d(0.95, 1.05, 1); }
+  75% { transform: scale3d(1.05, 0.95, 1); }
+  100% { transform: scale3d(1, 1, 1); }
+}
+
+.cards{
+  padding:5vh 0 2vh;
+  display:flex; flex-direction:column; gap:1.8rem;
+  max-width:520px; margin:0 auto;
+}
+.card{
+  border:4.5px solid var(--navy);
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:var(--cream);
+}
+.card-head{
+  background:var(--navy);
+  color:var(--cream-text);
+  text-align:center;
+  padding:.4em 1em;
+  font-family: "allotrope-heavy", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+  font-size: 1.2rem;
+  
+}
+.card-body{
+  padding:1.5em 1.3em;
+  text-align:center;
+  font-family: "hiragino-kaku-gothic-pron", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  color:var(--navy);
+  font-size:.94rem;
+}
+.card-body .parking-img{
+  width:100%;
+  height:auto;
+  border-radius:8px;
+  margin-bottom:1em;
+}
+.card-body .note{
+  display:block;
+  margin-top:.5em;
+  color:var(--ink-soft);
+  font-size:.8rem;
+}
+.card-body a{text-decoration:underline; font-weight:600;}
+.card-cta{
+  display:inline-block;
+  margin-top:1em;
+  border:2px solid var(--navy);
+  padding:.6em 1.4em;
+  font-family:"M PLUS Rounded 1c", sans-serif;
+  font-weight:800;
+  font-size:.88rem;
+}
+
+.france-bar{
+  display:flex;
+  width:100%;
+  height:20px;
+}
+
+.france-bar span{
+  flex:1;
+}
+
+.france-bar span:nth-child(1){
+  background:#1D4E89; /* 青 */
+}
+
+.france-bar span:nth-child(2){
+  background:#F8F4E9; /* 白 */
+}
+
+.france-bar span:nth-child(3){
+  background:#D84A3A; /* 赤 */
+}
+
+/* ---------- Responsive ---------- */
+@media (min-width:761px){
+  .slide{padding:72px var(--pad) 56px;}
+}
+
+/* =====================================================================
+   PC・タブレット対応（モバイル用のスタイルは上のまま変更していません）
+   ===================================================================== */
+
+/* ---- 全画面サイズ共通：ドットをクリックできるように / キーボード操作の見た目 ---- */
+.dots span{ cursor:pointer; position:relative; }
+.dots span::after{ content:""; position:absolute; inset:-8px; }
+a:focus-visible, button:focus-visible{
+  outline:3px solid #F7EFDE;
+  outline-offset:3px;
+}
+.photo-slider img{ -webkit-user-drag:none; user-select:none; }
+.photo-slider.dragging{ scroll-snap-type:none; cursor:grabbing !important; }
+.photo-slider.dragging img{ pointer-events:none; }
+
+/* マウスで操作できる環境ではドラッグできることを示す */
+@media (hover:hover) and (pointer:fine){
+  .photo-slider{ cursor:grab; }
+  .board-menu .photo-slider img{ cursor:zoom-in; }
+}
+
+/* ---- PC（900px以上） ---- */
+@media (min-width:900px){
+
+  /* 外枠：スマホと同じ「ブックレット」を保ちつつ、上余白をvw依存にしない */
+  .board{
+    width:min(92vw, 1120px);
+    margin:40px auto 56px;
+  }
+  .board.board-hero{ margin-top:40px; }
+
+  /* MENUボタン：スマホ用の margin-top:12%（幅基準）がPCで巨大にならないよう固定値に */
+  .topbar{
+    width:min(92vw, 1120px);
+    padding:56px var(--pad) 0;
+  }
+  .menu-btn{
+    margin-top:0;
+    font-size:.95rem;
+    padding:.7em 1.6em;
+    transition:opacity .25s ease, transform .25s ease;
+  }
+  .menu-btn:hover{ transform:translateY(-2px); }
+  .nav-overlay a{ font-size:2.2rem; transition:opacity .2s ease; }
+  .nav-overlay a:hover{ opacity:.65; }
+  .nav-close{ top:6%; right:5vw; font-size:1.8rem; }
+
+  /* 共通スライド */
+  .slide{
+    min-height:0;
+    padding:80px var(--pad) 64px;
+  }
+  .slide-caption{ font-size:1.15rem; }
+
+  /* ---- HERO：1カラムのまま、要素の大きさだけ上限を設ける ---- */
+  .board-hero .slide{ min-height:min(88vh, 880px); }
+  .slide-logo{ width:120px; margin-left:0; }
+  .slide-headline img{
+    width:420px;
+    max-width:100%;
+    margin:0 auto;
+  }
+  .slide-headline + .photo-slider{ margin-top:-208px; } /* タイトル画像の拡大率(420/約345)に合わせて重なり量を調整 */
+  .board-hero .photo-slider img{ height:clamp(360px, 56vh, 560px); }
+  .board-hero .slide-caption{ font-size:1.25rem; }
+
+  /* ---- その他のboard：左に写真、右にテキストの2カラム ---- */
+  .board:not(.board-hero) .slide{
+    display:grid;
+    grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);
+    grid-template-rows:1fr auto auto auto 1fr auto;
+    column-gap:clamp(32px, 5vw, 72px);
+    align-items:start;
+    padding:72px var(--pad);
+  }
+  .board:not(.board-hero) .photo-slider{
+    grid-column:1;
+    grid-row:1 / 6;
+    align-self:center;
+    width:100%;
+    margin:0;
+    border-radius:20px;
+    box-shadow:0 30px 60px -25px rgba(0,0,0,.45);
+  }
+  .board:not(.board-hero) .photo-slider img{
+    height:auto;
+    aspect-ratio:4 / 3;
+  }
+  /* Menu / Wine Night：写真を切り抜かず、縦長でも画面に収める */
+  .board:not(.board-hero) .photo-slider-natural img{
+    aspect-ratio:auto;
+    max-height:78vh;
+    object-fit:contain;
+  }
+  .board:not(.board-hero) .dots{
+    grid-column:1;
+    grid-row:6;
+    padding:1.2rem 0 0;
+  }
+  .board:not(.board-hero) .dots span{ width:10px; height:10px; }
+  .board:not(.board-hero) .section-title{
+    grid-column:2;
+    grid-row:2;
+    margin:0 0 1.4rem;
+    text-align:left;
+    font-size:clamp(40px, 4.4vw, 60px);
+    line-height:1.1;
+  }
+  .board:not(.board-hero) .slide-caption{
+    grid-column:2;
+    margin-top:0;
+    text-align:left;
+    font-size:1.2rem;
+    line-height:1.9;
+  }
+  .board:not(.board-hero) .slide-caption:nth-of-type(1){ grid-row:3; }
+  .board:not(.board-hero) .slide-caption:nth-of-type(2){ grid-row:4; margin-top:1rem !important; }
+
+  /* マーキー・わんちゃん */
+  .section-marquee{ margin-top:-2.5rem; margin-bottom:-2.5rem; }
+  .marquee-text{ font-size:64px; }
+  .dog-peek{ width:160px; right:-110px; }
+  .dog-peek.in{ right:-40px; }
+
+  /* Landing：カードを2×2に */
+  .landing{ padding:96px var(--pad) 72px; }
+  .logo-top{ width:min(30%, 320px); }
+  .landing-sub{ font-size:1.25rem; }
+  .insta-btn{ margin-top:1.2rem; transition:background .2s ease, color .2s ease; }
+  .insta-btn:hover{ background:var(--navy); color:var(--cream-text); }
+  .cards{
+    max-width:880px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2rem;
+    align-items:stretch;
+    padding-top:64px;
+  }
+  .card{ display:flex; flex-direction:column; }
+  .card-body{ flex:1; font-size:1rem; }
+}
+
+/* ---- 大型ディスプレイ ---- */
+@media (min-width:1600px){
+  html{ font-size:17px; }
+}

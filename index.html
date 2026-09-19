@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BISOUBISOU（ビズビズ）| 中標津のフレンチカフェ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://use.typekit.net/crq2ial.css">  <!-- BISOUBISOU用のフォント -->
+<script>
+  (function(d) {
+    var config = {
+      kitId: 'crq2ial',
+      scriptTimeout: 3000,
+      async: true
+    },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+</script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="icon" href="favicon.ico">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=M+PLUS+Rounded+1c:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="loader" class="loader">
+  <img src="img/logo.png" alt="" class="loader-logo">
+</div>
+
+<div id="page">
+
+  <div class="board board-hero">
+
+    <div class="topbar">
+      <button class="menu-btn" id="menuOpen">MENU</button>
+    </div>
+
+    <nav class="nav-overlay" id="navOverlay">
+      <button class="nav-close" id="menuClose">Close ×</button>
+      <a href="#showcase" class="nav-link">Top</a>
+      <a href="#menu" class="nav-link">Food &amp; Menu</a>
+      <a href="#landing" class="nav-link">About &amp; Access</a>
+    </nav>
+
+    <!-- 1. SHOWCASE SLIDER（見出し＋写真＋ドット＋キャプション） -->
+    <section class="showcase" id="showcase">
+      <div class="slides">
+        <div class="slide">
+          <span class="slide-logo"><img src="img/logo.png" alt=""></span>
+          <div class="slide-headline">
+            <img src="img/title.png" alt="">
+          </div>
+          <div class="photo-slider">
+            <img src="img/topimg.webp" alt="くつろぎの店内">
+            <img src="https://doto-hokkaido.com/wp/wp-content/uploads/2026/07/image-2-4-1024x768.jpg" alt="窓際の席">
+            <img src="img/burger.webp" alt="3">
+            <img src="img/kaunta.webp" alt="">
+          </div>
+          <div class="dots"></div>
+          <p class="slide-caption reveal">BISOUBISOUは、<br>北海道中標津町の<br>ちいさなフレンチカフェ。</p>
+          <p class="slide-caption reveal" style="margin-top: -0.5rem;">「我が家のように長居してほしい」<br>そんな想いを込めて作ったカフェです</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="section-marquee">
+    <p class="marquee-text">Un café , comme à la maison.</p>
+    <p class="marquee-text">Un café , comme à la maison.</p>
+    <p class="marquee-text">Un café , comme à la maison.</p>
+    <p class="marquee-text">Un café , comme à la maison.</p>
+    <p class="marquee-text">Un café , comme à la maison.</p>
+  </div>
+  
+  <div class="board board-mainfood" id="mainfood">
+  <section class="showcase">
+      <div class="slides">
+        <div class="slide">
+          <h2 class="section-title">Main Food</h2>
+          <div class="photo-slider photo-slider-auto">
+            <img src="img/burger.webp" alt="3"> 
+            <img src="img/tberger.png" alt="">
+            <img src="img/pan.jpg" alt="">
+          </div>
+          <div class="dots"></div>
+          <p class="slide-caption reveal"> フランスのアイデア × 地元の食材</p>
+          <p class="slide-caption reveal" style="margin-top: -0.5rem;">日本のモチモチ系パンとはひと味違う、<br>ニューヨークスタイルのベーグル</p>
+        </div>
+      </div>
+  </section>
+  <div class="dog-peek" id="dogPeek" aria-hidden="true">
+    <img src="img/dogdog.png" alt="">
+  </div>
+  </div>
+
+  <div class="board board-drink">
+  <section class="showcase">
+      <div class="slides">
+        <div class="slide">
+          <h2 class="section-title" style="color: #2B3D55;">DRINK</h2>
+          <div class="photo-slider">
+            <img src="img/miso.webp" alt="3">
+            <img src="img/coffee.webp" alt="くつろぎの店内">
+            <img src="img/coffee2.jpg" alt="">
+          </div>
+          <div class="dots"></div>
+          <p class="slide-caption reveal" style="color: #2B3D55;">当店オリジナルの<br>味噌キャラメルラテがオススメです</p>
+        </div>
+      </div>
+  </section>
+  </div>
+
+  <div class="board board-sweets">
+  <section class="showcase">
+      <div class="slides">
+        <div class="slide">
+          <h2 class="section-title">Sweets</h2>
+          <div class="photo-slider">
+            <img src="img/topimg.webp" alt="くつろぎの店内">
+          </div>
+          <div class="dots"></div>
+          <p class="slide-caption reveal">エクレアやクリームブリュレなど、フランスを代表する本格的な手作りスイーツがございます。</p>
+        </div>
+      </div>
+  </section>
+  </div>
+
+  <div class="board board-menu" id="menu">
+  <section class="showcase">
+      <div class="slides">
+        <div class="slide">
+          <h2 class="section-title">Menu</h2>
+          <div class="photo-slider photo-slider-natural">
+            <img src="img/menu.png" alt="くつろぎの店内">
+            <img src="img/drinkmenu.jpg" alt="">
+            <img src="img/burgermenu.png" alt="">
+          </div>
+          <div class="dots"></div>
+          <p class="slide-caption reveal">BISOUBISOUは、<br>全メニューホームメイド・出来立て</p>
+          <p class="slide-caption reveal" style="margin-top: -.5rem; font-size: small; font-weight: 300;">メニュー・価格は時期に応じて変動いたします。</p>
+        </div>
+      </div>
+  </section>
+  </div>
+
+  <div class="board board-winenight" id="winenight">
+  <section class="showcase">
+      <div class="slides">
+        <div class="slide">
+          <h2 class="section-title">Wine Night</h2>
+          <div class="photo-slider photo-slider-natural">
+            <img src="img/wine2.png" alt="">
+            <img src="img/wine3.png" alt="">
+            <img src="img/wine4.png" alt="">
+          </div>
+          <div class="dots"></div>
+          <p class="slide-caption reveal">夜だけの特別コース、<br>「Wine Night」がスタートしました。</p>
+          <p class="slide-caption reveal" style="margin-top: -.5rem; font-size: small; font-weight: 300;">
+
+            完全予約制となります。ご来店の前日までにご予約をお願いいたします。<br>
+            (instagram・公式LINE・お電話にてお待ちしております)
+          </p>
+        </div>
+      </div>
+  </section>
+  </div>
+  
+    <!-- 3. LANDING（ロゴ・Instagram・店舗情報カード） -->
+    <section class="landing" id="landing">
+      <div class="logo-top"><img src="img/logo.png" alt=""></div>
+      <p class="landing-sub reveal">最新情報は<br>Instagramをチェック！</p>
+      <a class="insta-btn reveal" href="https://www.instagram.com/bisoubisou.cafe/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+        Instagram
+      </a>
+
+      <div class="cards reveal">
+        <div class="card">
+          <div class="card-head">Place</div>
+          <div class="card-body">
+            〒086-1053<br>
+            北海道標津郡中標津町<br>
+            東13条北1丁目2番地 PRIMOPASSO1階
+            <span class="note"><a href="https://maps.app.goo.gl/LeWistYZeQFd5TKW6" target="_blank" rel="noopener">Google Mapsで開く</a></span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head">Parking</div>
+          <div class="card-body">
+            <img class="parking-img" src="img/p.png" alt="駐車場">
+            当店の駐車場は家具のほくしん様になります。指定駐車場以外の駐車はご遠慮ください。
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head">Open / Close</div>
+          <div class="card-body">
+            営業時間　9:00〜18:00<br>
+            定休日　　水曜日 木曜日隔週
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head">Reservation</div>
+          <div class="card-body">
+            ご予約・お問い合わせは<br>公式LINEよりお待ちしております。
+            <br>
+            <a class="card-cta" href="https://line.me/R/ti/p/@911jqgne" target="_blank" rel="noopener"><i class="fa-brands fa-line"></i>  公式LINEを見る</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+</div>
+
+<div class="lightbox" id="lightbox">
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<div class="france-bar">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<script>
+  window.addEventListener('load', function(){
+  document.getElementById('page').classList.add('visible');
+
+  var loader = document.getElementById('loader');
+  if(loader){
+
+    setTimeout(function(){
+
+      loader.classList.add('hide');
+
+      setTimeout(function(){
+        loader.remove();
+      }, 700);
+
+    }, 1200); // ← 表示時間
+  }
+});
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduceMotion && 'IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.15, rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+
+  var menuOpen = document.getElementById('menuOpen');
+  var menuClose = document.getElementById('menuClose');
+  var navOverlay = document.getElementById('navOverlay');
+  function openNav(){
+    navOverlay.classList.add('open');
+    menuOpen.classList.add('is-hidden');
+  }
+  function closeNav(){
+    navOverlay.classList.remove('open');
+    menuOpen.classList.remove('is-hidden');
+  }
+  menuOpen.addEventListener('click', openNav);
+  menuClose.addEventListener('click', closeNav);
+  document.querySelectorAll('.nav-link').forEach(function(a){
+    a.addEventListener('click', closeNav);
+  });
+
+  // 各写真スライダーごとにドットを画像枚数に合わせて生成し、
+  // スクロール位置に応じて対応するドットが動くようにする
+  document.querySelectorAll('.photo-slider').forEach(function(slider){
+    var dotsEl = slider.parentElement.querySelector('.dots');
+    if(!dotsEl) return;
+    var imgs = slider.querySelectorAll('img');
+    dotsEl.innerHTML = '';
+    imgs.forEach(function(_, i){
+      var span = document.createElement('span');
+      if(i === 0) span.classList.add('active');
+      dotsEl.appendChild(span);
+    });
+    slider.addEventListener('scroll', function(){
+      var idx = Math.round(slider.scrollLeft / slider.clientWidth);
+      dotsEl.querySelectorAll('span').forEach(function(d,i){ d.classList.toggle('active', i===idx); });
+    });
+    // PC：ドットをクリックでその写真へ移動
+    dotsEl.querySelectorAll('span').forEach(function(d,i){
+      d.addEventListener('click', function(){
+        slider.scrollTo({ left: slider.clientWidth * i, behavior: 'smooth' });
+      });
+    });
+  });
+
+  // PC：マウスのドラッグで写真をスライドできるようにする（タッチ操作は標準のスワイプのまま）
+  document.querySelectorAll('.photo-slider').forEach(function(slider){
+    var down = false, moved = false, startX = 0, startLeft = 0;
+    slider.addEventListener('pointerdown', function(e){
+      if(e.pointerType !== 'mouse' || e.button !== 0) return;
+      down = true; moved = false;
+      startX = e.clientX; startLeft = slider.scrollLeft;
+    });
+    window.addEventListener('pointermove', function(e){
+      if(!down) return;
+      var dx = e.clientX - startX;
+      if(!moved && Math.abs(dx) > 5){ moved = true; slider.classList.add('dragging'); }
+      if(moved) slider.scrollLeft = startLeft - dx;
+    });
+    window.addEventListener('pointerup', function(){
+      if(!down) return;
+      down = false;
+      if(moved){
+        slider.classList.remove('dragging');
+        var idx = Math.round(slider.scrollLeft / slider.clientWidth);
+        slider.scrollTo({ left: slider.clientWidth * idx, behavior: 'smooth' });
+      }
+    });
+    // ドラッグ後に拡大表示(lightbox)が誤って開かないようにする
+    slider.addEventListener('click', function(e){
+      if(moved){ e.stopPropagation(); e.preventDefault(); moved = false; }
+    }, true);
+  });
+
+  // Main Foodの画像スライダーを一定間隔で自動的にスライドさせる
+  if(!reduceMotion){
+    document.querySelectorAll('.photo-slider-auto').forEach(function(slider){
+      var imgs = slider.querySelectorAll('img');
+      setInterval(function(){
+        var i = (Math.round(slider.scrollLeft / slider.clientWidth) + 1) % imgs.length;
+        slider.scrollTo({ left: slider.clientWidth * i, behavior: 'smooth' });
+      }, 4000);
+    });
+  }
+
+  // Main Food・Sweets・landingまでスクロールしたら、わんちゃんが画面右端から顔を出す
+  var dogPeek = document.getElementById('dogPeek');
+  var dogTriggers = document.querySelectorAll('#mainfood, .board-sweets, #landing');
+  if(dogPeek && dogTriggers.length){
+    if(!reduceMotion && 'IntersectionObserver' in window){
+      var dogIo = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          entry.target.dataset.dogVisible = entry.isIntersecting ? '1' : '0';
+        });
+        var anyVisible = Array.prototype.some.call(dogTriggers, function(el){
+          return el.dataset.dogVisible === '1';
+        });
+        dogPeek.classList.toggle('in', anyVisible);
+      }, {threshold:.3});
+      dogTriggers.forEach(function(el){ dogIo.observe(el); });
+    } else {
+      dogPeek.classList.add('in');
+    }
+  }
+
+  // Menuセクションの画像をクリックすると拡大表示する
+  var lightbox = document.getElementById('lightbox');
+  var lightboxImg = document.getElementById('lightboxImg');
+  if(lightbox && lightboxImg){
+    document.querySelectorAll('.board-menu .photo-slider img').forEach(function(img){
+      img.addEventListener('click', function(){
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add('open');
+      });
+    });
+    lightbox.addEventListener('click', function(){
+      lightbox.classList.remove('open');
+    });
+  }
+</script>
+
+</body>
+</html>
